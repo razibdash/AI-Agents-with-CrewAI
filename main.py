@@ -4,18 +4,19 @@ from crewai import Agent
 from crewai_tools import SerperDevTool
 from crewai import Task
 from crewai import Crew, Process
+from langchain_groq import ChatGroq
 
 # Load environment variables
 load_dotenv()
 
-SERPER_API_KEY=os.environ("SERPER_API_KEY")
-GROQ_API_KEY=os.environ("GROQ_API_KEY")
+SERPER_API_KEY=os.environ["SERPER_API_KEY"]
+GROQ_API_KEY=os.environ["GROQ_API_KEY"]
 
 os.environ["SERPER_API_KEY"] = SERPER_API_KEY 
 os.environ["GROQ_API_KEY"] = GROQ_API_KEY
 
 os.environ["GROQ_MODEL"] = "llama3-70b-8192" 
-
+llm = ChatGroq(model="llama3-70b-8192", api_key=os.environ["GROQ_API_KEY"])
 search_tool = SerperDevTool()
 
 # Creating a senior researcher agent with memory and verbose mode
@@ -30,7 +31,8 @@ researcher=Agent(
         the world."""
     ),
     tools=[search_tool],
-    allow_delegation=True
+    allow_delegation=True,
+    llm=llm
 )
 
 # Creating a writer agent with custom tools and delegation capability

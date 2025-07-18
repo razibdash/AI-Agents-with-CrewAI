@@ -8,8 +8,10 @@ from crewai import Crew
 
 load_dotenv()
 
-SERPER_API_KEY=os.environ("SERPER_API_KEY")
-GROQ_API_KEY=os.environ("GROQ_API_KEY")
+GROQ_API_KEY = os.environ["GROQ_API_KEY"]
+SERPER_API_KEY = os.environ.get("SERPER_API_KEY")
+os.environ["SERPER_API_KEY"] = SERPER_API_KEY 
+os.environ["GROQ_API_KEY"] = GROQ_API_KEY
 search_tool = SerperDevTool()
 #model 
 llm=ChatGroq(
