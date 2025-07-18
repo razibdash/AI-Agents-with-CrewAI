@@ -48,3 +48,16 @@ writer = Agent(
     allow_delegation=False
 )
 
+#define the research_task
+research_task = Task(
+    description=(
+        "Identify the next big trend in {topic}. "
+        "Focus on identifying pros and cons and the overall narrative. "
+        "Your final report should clearly articulate the key points, "
+        "its market opportunities, and potential risks."
+    ),
+    expected_output="A comprehensive 3 paragraphs long report on the latest AI trends.",
+    tools=[search_tool],
+    agent=researcher,
+)
+
