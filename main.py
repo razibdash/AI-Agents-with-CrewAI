@@ -62,7 +62,7 @@ research_task = Task(
 )
 
 #define the writer task
-writter_task=Task(
+write_task=Task(
     description=(
         "Compose an insightful article on {topic}. "
         "Focus on the latest trends and how it's impacting the industry. "
@@ -73,6 +73,13 @@ writter_task=Task(
     agent=writer,
     async_execution=False,
     output_file="new-blog-post.md",
+)
+
+# Forming the tech-focused crew with enhanced configurations
+crew = Crew(
+    agents=[researcher, writer],
+    tasks=[research_task, write_task],
+    process=Process.sequential 
 )
 
 
