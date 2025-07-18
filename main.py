@@ -82,4 +82,8 @@ crew = Crew(
     process=Process.sequential 
 )
 
+# Starting the task execution process with enhanced feedback
+result = crew.kickoff(inputs={'topic': 'AI in healthcare'})
+print(result)
+
 
